@@ -4,266 +4,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>සුභසාධන සංගමය 2026</title>
 
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+
         *{
+            margin:0;
+            padding:0;
             box-sizing:border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: 'Poppins', 'Iskoola Pota', sans-serif;
-            background: linear-gradient(-45deg, #020024, #090979, #d400ff, #ff0055, #00d2ff);
-            background-size: 400% 400%;
-            animation: moveGradient 12s ease infinite;
-            color: white;
-            overflow-x: hidden;
-            min-height: 100vh;
+        body{
+            font-family:'Poppins','Iskoola Pota',sans-serif;
+            background:linear-gradient(-45deg,#ff00cc,#3333ff,#00d2ff,#ff0055);
+            background-size:400% 400%;
+            animation:bgMove 12s ease infinite;
+            min-height:100vh;
+            color:white;
+            overflow-x:hidden;
         }
 
-        @keyframes moveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .main-title {
-            font-size: clamp(2.5rem, 7vw, 5rem);
-            font-weight: 800;
-            animation: dropBounce 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            text-shadow: 0 0 30px rgba(255,255,255,0.4);
-        }
-
-        @keyframes dropBounce {
-            0% {
-                transform: translateY(-200px);
-                opacity: 0;
+        @keyframes bgMove{
+            0%{
+                background-position:0% 50%;
             }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
+
+            50%{
+                background-position:100% 50%;
+            }
+
+            100%{
+                background-position:0% 50%;
             }
         }
 
-        .options {
-            display: flex;
-            gap: 30px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-            justify-content: center;
+        /* HERO */
+
+        .hero{
+            width:100%;
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:20px;
         }
 
-        .btn-card {
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(15px);
-            padding: 25px 50px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-            cursor: pointer;
-            transition: 0.4s;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            user-select: none;
+        .main-title{
+            font-size:clamp(2.5rem,7vw,5rem);
+            font-weight:800;
+            margin-bottom:50px;
+            text-shadow:0 0 30px rgba(255,255,255,0.4);
+            animation:dropDown 1.3s ease;
         }
 
-        .btn-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            background: rgba(255,255,255,0.25);
-            box-shadow: 0 15px 40px rgba(255,0,85,0.4);
-        }
-
-        .content-section {
-            display: none;
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: auto;
-            animation: slideIn 0.8s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
+        @keyframes dropDown{
+            from{
+                opacity:0;
+                transform:translateY(-120px);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            to{
+                opacity:1;
+                transform:translateY(0);
             }
         }
 
-        /* Gallery */
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-            gap: 25px;
-            margin-top: 30px;
+        .options{
+            display:flex;
+            gap:30px;
+            flex-wrap:wrap;
+            justify-content:center;
         }
 
-        .gallery-item {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 18px;
-            cursor: pointer;
-            transition: 0.4s;
-            border: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        .btn-card{
+            padding:25px 55px;
+            border-radius:22px;
+            cursor:pointer;
+            font-size:1.3rem;
+            font-weight:bold;
+
+            background:rgba(255,255,255,0.12);
+            border:1px solid rgba(255,255,255,0.2);
+
+            backdrop-filter:blur(15px);
+
+            transition:0.4s;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+
+            user-select:none;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.03);
-            border-color: #00d2ff;
-            box-shadow: 0 15px 40px rgba(0,210,255,0.35);
+        .btn-card:hover{
+            transform:translateY(-10px) scale(1.05);
+
+            background:rgba(255,255,255,0.22);
+
+            box-shadow:0 15px 35px rgba(0,0,0,0.3);
         }
 
-        /* Finance */
+        /* CONTENT */
 
-        .table-wrapper {
-            background: rgba(0,0,0,0.65);
-            border-radius: 20px;
-            padding: 20px;
-            overflow: auto;
-            max-height: 650px;
-            backdrop-filter: blur(10px);
+        .content-section{
+            display:none;
+            max-width:1300px;
+            margin:auto;
+            padding:60px 20px;
+            animation:fadeIn 0.7s ease;
         }
 
-        .zoom-controls {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
 
-        .zoom-btn {
-            border: none;
-            padding: 12px 22px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .zoom-btn:hover {
-            transform: scale(1.05);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-            transform-origin: top left;
-            transition: transform 0.3s ease;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        th {
-            background: #00d2ff;
-            color: black;
-            position: sticky;
-            top: 0;
-        }
-
-        tr:hover td {
-            background: rgba(255,255,255,0.06);
-        }
-
-        /* Lightbox */
-
-        #lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.92);
-            backdrop-filter: blur(15px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-
-        #lightbox img {
-            max-width: 92%;
-            max-height: 85%;
-            border-radius: 20px;
-            border: 3px solid white;
-            box-shadow: 0 0 30px rgba(255,255,255,0.3);
-        }
-
-        .close-lb {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            font-size: 55px;
-            color: white;
-            cursor: pointer;
-            user-select: none;
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
         }
 
         h2{
             text-align:center;
-            font-size:2rem;
-            margin-bottom:25px;
+            margin-bottom:35px;
+            font-size:2.3rem;
+            text-shadow:0 0 20px rgba(255,255,255,0.3);
         }
 
-        @media(max-width:600px){
+        /* GALLERY */
+
+        .gallery-grid{
+            display:grid;
+
+            grid-template-columns:
+            repeat(auto-fit,minmax(320px,1fr));
+
+            gap:25px;
+        }
+
+        .gallery-item{
+            width:100%;
+            height:320px;
+
+            object-fit:cover;
+
+            border-radius:20px;
+
+            cursor:pointer;
+
+            transition:0.4s;
+
+            border:2px solid rgba(255,255,255,0.15);
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.25);
+        }
+
+        .gallery-item:hover{
+            transform:scale(1.03);
+
+            border-color:#00d2ff;
+
+            box-shadow:0 15px 40px rgba(0,210,255,0.4);
+        }
+
+        /* LIGHTBOX */
+
+        #lightbox{
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+
+            background:rgba(0,0,0,0.92);
+
+            backdrop-filter:blur(15px);
+
+            display:none;
+
+            justify-content:center;
+            align-items:center;
+
+            z-index:9999;
+
+            padding:20px;
+        }
+
+        #lightbox img{
+            max-width:92%;
+            max-height:88%;
+
+            border-radius:20px;
+
+            border:3px solid white;
+
+            box-shadow:0 0 40px rgba(255,255,255,0.25);
+        }
+
+        .close-lb{
+            position:absolute;
+
+            top:20px;
+            right:40px;
+
+            font-size:65px;
+
+            color:white;
+
+            cursor:pointer;
+
+            user-select:none;
+        }
+
+        /* FINANCE */
+
+        .table-wrapper{
+
+            background:rgba(0,0,0,0.55);
+
+            backdrop-filter:blur(12px);
+
+            border-radius:20px;
+
+            padding:20px;
+
+            overflow:auto;
+
+            max-height:700px;
+        }
+
+        table{
+            width:100%;
+
+            border-collapse:collapse;
+
+            min-width:900px;
+
+            transform-origin:top left;
+
+            transition:0.3s;
+        }
+
+        th,td{
+            padding:15px;
+
+            text-align:center;
+
+            border-bottom:
+            1px solid rgba(255,255,255,0.1);
+        }
+
+        th{
+            background:#00d2ff;
+
+            color:black;
+
+            position:sticky;
+
+            top:0;
+        }
+
+        tr:hover td{
+            background:rgba(255,255,255,0.06);
+        }
+
+        /* ZOOM */
+
+        .zoom-controls{
+            display:flex;
+
+            gap:12px;
+
+            margin-bottom:20px;
+
+            flex-wrap:wrap;
+        }
+
+        .zoom-btn{
+            border:none;
+
+            padding:12px 22px;
+
+            border-radius:10px;
+
+            cursor:pointer;
+
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        .zoom-btn:hover{
+            transform:scale(1.05);
+        }
+
+        /* MOBILE */
+
+        @media(max-width:700px){
+
             .btn-card{
                 width:100%;
-                text-align:center;
             }
 
-            .main-title{
-                font-size:2.7rem;
+            .gallery-item{
+                height:250px;
+            }
+
+            h2{
+                font-size:1.8rem;
             }
         }
+
     </style>
 </head>
+
 <body>
 
     <!-- HERO -->
+
     <div class="hero">
+
         <h1 class="main-title">
             සුභසාධන සංගමය 2026
         </h1>
 
         <div class="options">
 
-            <div class="btn-card"
-                 data-aos="fade-right"
-                 onclick="showSec('gallery')">
+            <div
+            class="btn-card"
+            data-aos="fade-right"
+            onclick="showSec('gallery')">
+
                 📷 මීඩියා ගැලරිය
+
             </div>
 
-            <div class="btn-card"
-                 data-aos="fade-left"
-                 onclick="loadFinance()">
+            <div
+            class="btn-card"
+            data-aos="fade-left"
+            onclick="loadFinance()">
+
                 💰 මුදල් තොරතුරු
+
             </div>
 
         </div>
+
     </div>
 
     <!-- GALLERY -->
+
     <div id="gallery" class="content-section">
 
         <h2>📷 මීඩියා ගැලරිය</h2>
@@ -271,100 +370,136 @@
         <div class="gallery-grid">
 
             <!-- IMAGE 1 -->
+
             <img
-                src="https://drive.google.com/uc?export=view&id=1pVkLRxM52kC4mw3F6ElgBMlzRQIMwRj1"
-                class="gallery-item"
-                onclick="openLB(this.getAttribute('src'))"
-                alt="Gallery Image 1"
-            >
+            src="https://i.postimg.cc/sQ0Gf6RH/Whats-App-Image-2026-05-08-at-19-16-32.jpg"
+            class="gallery-item"
+            onclick="openLB(this.src)"
+            alt="Gallery Image 1">
 
             <!-- IMAGE 2 -->
+
             <img
-                src="https://drive.google.com/uc?export=view&id=1LLM11qiokqMqlWAnaN9dcrjqjEIY36lm"
-                class="gallery-item"
-                onclick="openLB(this.getAttribute('src'))"
-                alt="Gallery Image 2"
-            >
+            src="https://i.postimg.cc/sGQQMYjr/Whats-App-Image-2026-05-08-at-19-17-49.jpg"
+            class="gallery-item"
+            onclick="openLB(this.src)"
+            alt="Gallery Image 2">
 
         </div>
+
     </div>
 
     <!-- FINANCE -->
+
     <div id="finance" class="content-section">
 
         <h2>💰 මුදල් බැර කිරීම් ලේඛනය</h2>
 
         <div class="zoom-controls">
-            <button class="zoom-btn" onclick="zoomTable(0.1)">
+
+            <button
+            class="zoom-btn"
+            onclick="zoomTable(0.1)">
+
                 Zoom In +
+
             </button>
 
-            <button class="zoom-btn" onclick="zoomTable(-0.1)">
+            <button
+            class="zoom-btn"
+            onclick="zoomTable(-0.1)">
+
                 Zoom Out -
+
             </button>
 
-            <button class="zoom-btn" onclick="resetZoom()">
+            <button
+            class="zoom-btn"
+            onclick="resetZoom()">
+
                 Reset
+
             </button>
+
         </div>
 
         <div class="table-wrapper">
+
             <div id="table-data">
+
                 දත්ත පූරණය වෙමින් පවතියි...
+
             </div>
+
         </div>
 
     </div>
 
     <!-- LIGHTBOX -->
+
     <div id="lightbox" onclick="closeLB()">
 
-        <span class="close-lb">&times;</span>
+        <span class="close-lb">
+            &times;
+        </span>
 
         <img id="lb-img">
 
     </div>
 
     <!-- AOS -->
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
 
         AOS.init();
 
-        // SHOW SECTION
+        /* SHOW SECTION */
 
         function showSec(id){
 
-            document.querySelectorAll('.content-section')
-            .forEach(sec=>{
-                sec.style.display='none';
+            document
+            .querySelectorAll('.content-section')
+            .forEach(section=>{
+
+                section.style.display='none';
+
             });
 
-            const target=document.getElementById(id);
+            const target =
+            document.getElementById(id);
 
             target.style.display='block';
 
             target.scrollIntoView({
+
                 behavior:'smooth'
+
             });
         }
 
-        // LIGHTBOX
+        /* LIGHTBOX */
 
         function openLB(src){
 
-            document.getElementById('lb-img').src = src;
+            document
+            .getElementById('lb-img')
+            .src = src;
 
-            document.getElementById('lightbox').style.display='flex';
+            document
+            .getElementById('lightbox')
+            .style.display='flex';
         }
 
         function closeLB(){
 
-            document.getElementById('lightbox').style.display='none';
+            document
+            .getElementById('lightbox')
+            .style.display='none';
         }
 
-        // LOAD GOOGLE SHEET
+        /* GOOGLE SHEET */
 
         async function loadFinance(){
 
@@ -378,27 +513,37 @@
 
             try{
 
-                const res = await fetch(csvUrl);
+                const response =
+                await fetch(csvUrl);
 
-                const data = await res.text();
+                const data =
+                await response.text();
 
-                const rows = data.trim().split('\n');
+                const rows =
+                data.trim().split('\n');
 
-                let html = '<table id="myTable">';
+                let html =
+                '<table id="myTable">';
 
                 rows.forEach((row,index)=>{
 
                     html += '<tr>';
 
-                    const cols = row.split(',');
+                    const cols =
+                    row.split(',');
 
                     cols.forEach(col=>{
 
                         col = col.replace(/"/g,'');
 
                         if(index===0){
+
                             html += `<th>${col}</th>`;
-                        }else{
+
+                        }
+
+                        else{
+
                             html += `<td>${col}</td>`;
                         }
 
@@ -410,20 +555,29 @@
 
                 html += '</table>';
 
-                document.getElementById('table-data').innerHTML = html;
+                document
+                .getElementById('table-data')
+                .innerHTML = html;
 
             }
 
-            catch(err){
+            catch(error){
 
-                document.getElementById('table-data').innerHTML =
-                "❌ දත්ත ලබා ගැනීමට නොහැකි විය.<br><br>Google Sheet එක 'Publish to web' කර ඇතිද බලන්න.";
+                document
+                .getElementById('table-data')
+                .innerHTML =
 
-                console.error(err);
+                `
+                ❌ දත්ත ලබා ගැනීමට නොහැකි විය.
+                <br><br>
+                Google Sheet එක Publish To Web කර ඇතිද බලන්න.
+                `;
+
+                console.log(error);
             }
         }
 
-        // ZOOM TABLE
+        /* TABLE ZOOM */
 
         let currentScale = 1;
 
@@ -432,10 +586,14 @@
             currentScale += value;
 
             if(currentScale < 0.5){
+
                 currentScale = 0.5;
             }
 
-            document.getElementById('myTable').style.transform =
+            document
+            .getElementById('myTable')
+            .style.transform =
+
             `scale(${currentScale})`;
         }
 
@@ -443,7 +601,10 @@
 
             currentScale = 1;
 
-            document.getElementById('myTable').style.transform =
+            document
+            .getElementById('myTable')
+            .style.transform =
+
             `scale(1)`;
         }
 
