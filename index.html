@@ -8,123 +8,116 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        :root {
-            --rgb-grad: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-        }
-
+        /* 1. Animated Liquid Gradient Background (Based on your image) */
         body {
             margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
             font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #ff0055, #00d2ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* 1. Main Title Animation (Top to Bottom) */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Title Drop-in Animation */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #fff;
             text-align: center;
         }
 
         .main-title {
-            font-size: 4rem;
+            font-size: clamp(2rem, 8vw, 4.5rem);
             font-weight: 800;
-            background: var(--rgb-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: dropIn 1.5s ease-out forwards;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            animation: dropIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         @keyframes dropIn {
-            0% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+            0% { transform: translateY(-150px) scale(0.8); opacity: 0; }
             100% { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        .scroll-indicator {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #888;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        /* 2. Options Section (Side Animations) */
-        .options-container {
-            height: 80vh;
+        /* Option Cards with Side Entrance */
+        .options-section {
+            padding: 100px 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 40px;
-            padding: 20px;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
-        .option-card {
-            width: 300px;
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             padding: 40px;
-            border-radius: 20px;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 280px;
             text-align: center;
+            cursor: pointer;
+            transition: 0.4s;
             font-size: 1.5rem;
             font-weight: bold;
         }
 
-        .option-card:hover { transform: scale(1.1); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .gallery-card { color: #e91e63; border-bottom: 5px solid #e91e63; }
-        .finance-card { color: #2196f3; border-bottom: 5px solid #2196f3; }
-
-        /* 3. Image Lightbox with Blur Fade */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.5s;
+        .card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
-        .lightbox img { max-width: 85%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 50px rgba(255,255,255,0.2); }
-
-        .close-btn {
-            position: absolute;
-            top: 20px; right: 30px;
-            font-size: 40px; color: white; cursor: pointer;
+        /* HTML Table Style (Modern) */
+        .table-container {
+            width: 90%;
+            margin: 50px auto;
+            overflow-x: auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 20px;
+            display: none; /* Hidden until clicked */
         }
 
-        /* 4. Zoomable Finance Table */
-        .table-wrap {
-            overflow: auto;
-            border-radius: 15px;
-            background: white;
-            padding: 10px;
-            touch-action: pinch-zoom; /* Mobile Zoom Support */
-        }
-
-        iframe {
+        table {
             width: 100%;
-            height: 800px;
-            border: none;
-            transition: transform 0.3s ease;
+            border-collapse: collapse;
+            min-width: 600px;
         }
 
-        .zoom-controls { margin-bottom: 10px; }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        th { background: rgba(255, 255, 255, 0.1); color: #00d2ff; }
+
+        /* Lightbox for Gallery */
+        #lightbox {
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(20px);
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index: 9999;
+        }
+
+        #lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+        .close-btn { position: absolute; top: 20px; right: 40px; font-size: 50px; cursor: pointer; color: white; }
 
     </style>
 </head>
@@ -132,74 +125,72 @@
 
     <div class="hero">
         <h1 class="main-title">සුභසාධන සංගමය 2026</h1>
-        <div class="scroll-indicator">පහළට ස්ක්‍රෝල් කරන්න ↓</div>
+        <p style="opacity: 0.7;">පහළට ස්ක්‍රෝල් කරන්න ↓</p>
     </div>
 
-    <div class="options-container">
-        <div class="option-card gallery-card" data-aos="fade-right" onclick="scrollToSection('gallery-sec')">
-            මීඩියා ගැලරිය
-        </div>
-        <div class="option-card finance-card" data-aos="fade-left" onclick="scrollToSection('finance-sec')">
-            මුදල් තොරතුරු
-        </div>
+    <div class="options-section">
+        <div class="card" data-aos="fade-right" onclick="toggleSection('gallery-view')">📷 මීඩියා ගැලරිය</div>
+        <div class="card" data-aos="fade-left" onclick="fetchSheetData()">💰 මුදල් තොරතුරු</div>
     </div>
 
-    <div id="gallery-sec" class="container" style="padding: 50px; display:none;">
-        <h2 style="text-align: center;">මීඩියා ගැලරිය</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-            <img src="WhatsApp Image 2026-05-08 at 19.16.32.jpeg" style="width: 100%; cursor: pointer;" onclick="openLightbox(this.src)">
-            <img src="WhatsApp Image 2026-05-08 at 19.17.49.jpeg" style="width: 100%; cursor: pointer;" onclick="openLightbox(this.src)">
-            
-        
-	    </div>
-    </div>
-
-    <div id="finance-sec" class="container" style="padding: 50px; display:none;">
-        <h2 style="text-align: center;">මුදල් බැර කිරීම් සම්බන්ධ වගුව</h2>
-        <div class="zoom-controls">
-            <button onclick="zoomTable(1.2)">Zoom In +</button>
-            <button onclick="zoomTable(1)">Reset</button>
-            <button onclick="zoomTable(0.8)">Zoom Out -</button>
-        </div>
-        <div class="table-wrap" id="table-container">
-            <iframe id="finance-frame" src="https://docs.google.com/spreadsheets/d/1K_VDk7w_u3vB6vj_k1inyBjxjPBT2WWkx296x9bypAg/edit?usp=sharing"></iframe>
+    <div id="gallery-view" class="table-container" style="display:none; text-align:center;">
+        <h2>මීඩියා ගැලරිය</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <img src="WhatsApp Image 2026-05-08 at 19.17.49.jpeg" style="width:100%; border-radius:15px; cursor:pointer;" onclick="openLB(this.src)">
+            <img src="WhatsApp Image 2026-05-08 at 19.16.32.jpeg" style="width:100%; border-radius:15px; cursor:pointer;" onclick="openLB(this.src)">
         </div>
     </div>
 
-    <div id="lightbox" class="lightbox">
-        <span class="close-btn" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="">
+    <div id="finance-view" class="table-container">
+        <h2 style="text-align: center;">මුදල් බැර කිරීම් ලේඛනය</h2>
+        <div id="table-output">දත්ත පූරණය වෙමින් පවතියි...</div>
+    </div>
+
+    <div id="lightbox" onclick="this.style.display='none'">
+        <span class="close-btn">&times;</span>
+        <img id="lb-img">
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({ duration: 1000 });
 
-        function scrollToSection(id) {
+        function toggleSection(id) {
             document.getElementById(id).style.display = 'block';
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Lightbox Functions
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
+        function openLB(src) {
+            document.getElementById('lb-img').src = src;
             document.getElementById('lightbox').style.display = 'flex';
         }
 
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
+        // --- Google Sheet to HTML Table Logic ---
+        const sheetID = "https://docs.google.com/spreadsheets/d/1K_VDk7w_u3vB6vj_k1inyBjxjPBT2WWkx296x9bypAg/edit?usp=sharing"; // මෙතනට ඔයාගේ Sheet ID එක දාන්න
+        const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv`;
 
-        // Table Zooming
-        let currentZoom = 1;
-        function zoomTable(val) {
-            currentZoom = val;
-            document.getElementById('finance-frame').style.transform = `scale(${currentZoom})`;
-            document.getElementById('finance-frame').style.transformOrigin = '0 0';
+        async function fetchSheetData() {
+            toggleSection('finance-view');
+            try {
+                const response = await fetch(csvUrl);
+                const data = await response.text();
+                const rows = data.split('\n');
+                
+                let html = '<table>';
+                rows.forEach((row, index) => {
+                    html += '<tr>';
+                    const cols = row.split(',');
+                    cols.forEach(col => {
+                        html += index === 0 ? `<th>${col}</th>` : `<td>${col}</td>`;
+                    });
+                    html += '</tr>';
+                });
+                html += '</table>';
+                document.getElementById('table-output').innerHTML = html;
+            } catch (error) {
+                document.getElementById('table-output').innerHTML = "දත්ත ලබා ගැනීමට නොහැකි විය. කරුණාකර 'Publish to Web' කර ඇත්දැයි බලන්න.";
+            }
         }
     </script>
-
 </body>
 </html>
-	
-	
